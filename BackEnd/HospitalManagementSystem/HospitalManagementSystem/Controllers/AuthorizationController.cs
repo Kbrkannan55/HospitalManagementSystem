@@ -163,7 +163,8 @@ namespace Gym_Management.Controllers
                 UserName = model.Username,
                 SecurityStamp = Guid.NewGuid().ToString(),
                 Email = model.Email,
-                Name = model.Name
+                Name = model.Name,
+                Roles=model.Roles
             };
             // create a user here
             var result = await userManager.CreateAsync(user, model.Password);
@@ -176,7 +177,7 @@ namespace Gym_Management.Controllers
 
 
             //admin Registeration
-            if (user.UserName == "Admin")
+            if (user.Roles == "Admin")
             {
                 if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
                     await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
@@ -189,6 +190,22 @@ namespace Gym_Management.Controllers
                 status.Message = "Admin registeration Sucessfully done ";
                 return Ok(status);
             }
+            if(user.Roles =="Doctor")
+            {
+                // add roles here
+                // for admin registration UserRoles.Admin instead of UserRoles.Roles
+                if (!await roleManager.RoleExistsAsync(UserRoles.Doctor))
+                    await roleManager.CreateAsync(new IdentityRole(UserRoles.Doctor));
+
+                if (await roleManager.RoleExistsAsync(UserRoles.Doctor))
+                {
+                    await userManager.AddToRoleAsync(user, UserRoles.Doctor);
+                }
+                status.StatusCode = 1;
+                status.Message = "Sucessfully registered";
+                return Ok(status);
+            }
+
             else
             {
                 // add roles here
@@ -203,6 +220,7 @@ namespace Gym_Management.Controllers
                 status.StatusCode = 1;
                 status.Message = "Sucessfully registered";
                 return Ok(status);
+
             }
         }
  
