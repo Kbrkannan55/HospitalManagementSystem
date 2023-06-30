@@ -2,6 +2,8 @@
 using HospitalManagementSystem.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.VisualBasic;
 
 namespace HospitalManagementSystem.Repository.DoctorDetailServices
 {
@@ -17,6 +19,20 @@ namespace HospitalManagementSystem.Repository.DoctorDetailServices
         {
             var details = await _context.DoctorDetail.ToListAsync();
             return details;
+        }
+
+        public async Task<DoctorDetail> DeleteDoctor(int id)
+        {
+            var details=await _context.DoctorDetail.FirstOrDefaultAsync(x=>x.id==id);
+            _context.Remove(details);
+            return null;
+        }
+
+        public async Task<List<DoctorDetail>> PostDoctorDetails(DoctorDetail doctorDetail)
+        {
+            var details = _context.DoctorDetail.Add(doctorDetail);
+            _context.SaveChanges();
+            return await _context.DoctorDetail.ToListAsync();
         }
     }
 }

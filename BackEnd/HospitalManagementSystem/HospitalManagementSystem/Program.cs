@@ -1,6 +1,8 @@
 using Bware.Auth;
 using Gym_Management.Repository.Token;
 using HospitalManagementSystem.Models;
+using HospitalManagementSystem.Repository.AppointmentServices;
+using HospitalManagementSystem.Repository.DoctorDetailServices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -46,11 +48,22 @@ builder.Services.AddAuthentication(options =>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"]))
     };
 });
-
+builder.Services.AddScoped<IAppointmentServices, AppointmentServices>();
+builder.Services.AddScoped<IDoctorDetailServices,DoctorDetailServices> ();
 builder.Services.AddTransient<ITokenService, TokenService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddCors(option =>
+{
+    option.AddPolicy("ProductPolicy", builder =>
+    {
+        builder.AllowAnyHeader();
+        builder.AllowAnyMethod();
+        builder.AllowAnyOrigin();
+    });
+});
 
 var app = builder.Build();
 
@@ -62,7 +75,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseCors("ProductPolicy");
 app.UseAuthorization();
 
 app.MapControllers();
