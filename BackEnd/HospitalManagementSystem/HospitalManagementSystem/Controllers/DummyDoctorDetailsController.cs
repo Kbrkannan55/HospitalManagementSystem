@@ -28,7 +28,7 @@ namespace HospitalManagementSystem.Controllers
         }
 
         [HttpDelete]
-        public async Task<DoctorDummys> DeleteDoctor(string id)
+        public async Task<string> DeleteDoctor(string id)
         {
             return await _context.DeleteDoctor(id);
         }

@@ -8,9 +8,10 @@ namespace HospitalManagementSystem.Repository.DummyDetails
     public class DummyServices : IDummyServices
     {
         private DBContext _context;
-        public DummyServices(DBContext context) {
+        public DummyServices(DBContext context)
+        {
             _context = context;
-                }
+        }
 
         public async Task<List<DoctorDummys>> GetDoctorDetails()
         {
@@ -20,17 +21,17 @@ namespace HospitalManagementSystem.Repository.DummyDetails
 
         public async Task<List<DoctorDummys>> PostDoctor(DoctorDummys doctorDummys)
         {
-            var details = _context.DoctorDummys.Add(doctorDummys);
+            _context.DoctorDummys.Add(doctorDummys);
             _context.SaveChanges();
             return await _context.DoctorDummys.ToListAsync();
         }
 
-       public async Task<DoctorDummys?> DeleteDoctor(string id)
+       public async Task<string> DeleteDoctor(string id)
         {
-            var details=_context.DoctorDummys.FirstOrDefaultAsync(x=>x.User==id);
+            var details = _context.DoctorDummys.FirstOrDefault(x=>x.Username==id);
             _context.Remove(details);
             _context.SaveChanges();
-            return null;
+            return "Deleted";
         }
 
     }

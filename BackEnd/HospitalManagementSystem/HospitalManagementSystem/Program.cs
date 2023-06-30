@@ -3,6 +3,7 @@ using Gym_Management.Repository.Token;
 using HospitalManagementSystem.Models;
 using HospitalManagementSystem.Repository.AppointmentServices;
 using HospitalManagementSystem.Repository.DoctorDetailServices;
+using HospitalManagementSystem.Repository.DummyDetails;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -50,6 +51,7 @@ builder.Services.AddAuthentication(options =>
 });
 builder.Services.AddScoped<IAppointmentServices, AppointmentServices>();
 builder.Services.AddScoped<IDoctorDetailServices,DoctorDetailServices> ();
+builder.Services.AddScoped<IDummyServices, DummyServices>();
 builder.Services.AddTransient<ITokenService, TokenService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

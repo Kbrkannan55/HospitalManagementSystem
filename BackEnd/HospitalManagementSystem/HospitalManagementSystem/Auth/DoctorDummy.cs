@@ -5,13 +5,13 @@ namespace HospitalManagementSystem.Models
     public class DoctorDummys
     {
         [Required]
-        public string? Names { get; set; }
+        public string? Name { get; set; }
         [Key]
-        public string? User { get; set; }
+        public string? Username { get; set; }
         [Required]
-        public string? EmailId { get; set; }
+        public string? Email { get; set; }
         [Required]
-        public string? Role { get; set; }
+        public string? Roles { get; set; }
         [Required]
         public string? Password { get; set; }
 

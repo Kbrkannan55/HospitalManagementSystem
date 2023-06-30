@@ -21,11 +21,12 @@ namespace HospitalManagementSystem.Repository.DoctorDetailServices
             return details;
         }
 
-        public async Task<DoctorDetail> DeleteDoctor(int id)
+        public async Task<string> DeleteDoctor(int id)
         {
             var details=await _context.DoctorDetail.FirstOrDefaultAsync(x=>x.id==id);
             _context.Remove(details);
-            return null;
+            _context.SaveChanges();
+            return "Deleted";
         }
 
         public async Task<List<DoctorDetail>> PostDoctorDetails(DoctorDetail doctorDetail)
