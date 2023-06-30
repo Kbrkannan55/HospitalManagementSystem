@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HospitalManagementSystem.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20230630065855_Auth")]
-    partial class Auth
+    [Migration("20230630083208_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

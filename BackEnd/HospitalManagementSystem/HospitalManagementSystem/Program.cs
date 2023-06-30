@@ -1,5 +1,6 @@
 using Bware.Auth;
 using Gym_Management.Repository.Token;
+using HospitalManagementSystem.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
