@@ -7,7 +7,6 @@ namespace Bware.Auth
         [Required]
         public string? Name { get; set; }
         [Key]
-
         public string? Username { get; set; }
         [Required]
         public string? Email { get; set; }
