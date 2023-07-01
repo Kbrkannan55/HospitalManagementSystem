@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using HospitalManagementSystem.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace Bware.Auth
 {

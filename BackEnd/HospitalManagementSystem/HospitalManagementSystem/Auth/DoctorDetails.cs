@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Bware.Auth;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Numerics;
 
 namespace HospitalManagementSystem.Models
@@ -7,8 +9,11 @@ namespace HospitalManagementSystem.Models
     {
         [Key]
         public int? id { get; set; }
-        [Required]
-        public string? DoctorName { get; set; }
+
+        [Required] 
+        public string name { get; set; } = string.Empty;
+
+
         [Required]
         public string? Sex { get; set; }
         [Required]
